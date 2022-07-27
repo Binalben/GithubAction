@@ -18,4 +18,4 @@ jobs:
       working-directory: ./GithubAction
       run: chmod +x gradlew
     - name: Build with Gradle
-      run: ./gradlew build
+      run: ./GithubAction/gradlew build
