@@ -13,7 +13,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+ 
+      
     - name: Grant execute permission for gradlew
-      run: chmod +x ./GithubAction/gradlew
+      working-directory: ./GithubAction
+      run: chmod +x gradlew
     - name: Build with Gradle
-      run: ./GithubAction/gradlew build
+      run: ./gradlew build
