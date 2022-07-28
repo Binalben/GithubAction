@@ -36,9 +36,9 @@ jobs:
           name: index.html
           path:  ./GithubAction/app/build/reports/tests/testDebugUnitTest/index.html
 
-    - name: Upload test report directory
-      uses: actions/upload-artifact@v2
+    - name: Archive code coverage results
+      uses: actions/upload-artifact@v3
       with:
-          name: testDebugStuff
-          path: ./app/build/reports/tests/testDebugUnitTest/
+          name: code-coverage-report
+          path: ./GithubAction/app/build/reports/tests/testDebugUnitTest/index.html
       
