@@ -30,8 +30,9 @@ jobs:
       uses: asadmansr/android-test-report-action@v1.2.0
       if: ${{ always() }} # IMPORTANT: run Android Test Report regardless
       
-    - name: Archive code coverage results
+    - name: 'Upload Artifact'
       uses: actions/upload-artifact@v3
       with:
-          name: code-coverage-report
+       name: my-artifact
+       path: my_file.txt
       
