@@ -40,5 +40,5 @@ jobs:
       uses: actions/download-artifact@v3
       
     - name: Code Coverage Summary Report
-      uses: irongut/CodeCoverageSummary@v1.2.0
+      uses: devmasx/coverage-check-action@v1.2.0
       
