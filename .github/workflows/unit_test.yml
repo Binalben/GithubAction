@@ -39,3 +39,6 @@ jobs:
     - name: Download all workflow run artifacts
       uses: actions/download-artifact@v3
       
+    - name: Code Coverage Summary Report
+      uses: irongut/CodeCoverageSummary@v1.2.0
+      
