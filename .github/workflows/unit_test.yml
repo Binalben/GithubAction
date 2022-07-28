@@ -22,8 +22,9 @@ jobs:
     - name: Make gradlew executable
       run: chmod +x ./gradlew
       
-    - name: Run Unit Tests
-      run: ./gradlew testStagingDebugUnitTest
+    # Execute unit tests
+    - name: Unit Test
+      run: ./gradlew testDebugUnitTest
 
     - name: Report
       uses: dorny/test-reporter@v1
