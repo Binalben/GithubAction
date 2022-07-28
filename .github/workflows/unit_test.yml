@@ -30,17 +30,6 @@ jobs:
       uses: asadmansr/android-test-report-action@v1.2.0
       if: ${{ always() }} # IMPORTANT: run Android Test Report regardless
  
-       
-  coverage:
-       defaults:
-            run:
-             working-directory: ./GithubAction
-       permissions:
-            checks: write
-            pull-requests: write
-            contents: write
-       runs-on: ubuntu-latest
-       steps:
-            - uses: actions/checkout@v1
-            - uses: ArtiomTr/jest-coverage-report-action@v2
+    - name: Archive code coverage results
+      uses: ArtiomTr/jest-coverage-report-action@v2
       
