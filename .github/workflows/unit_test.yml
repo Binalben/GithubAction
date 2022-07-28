@@ -29,10 +29,18 @@ jobs:
     - name: Android Test Report
       uses: asadmansr/android-test-report-action@v1.2.0
       if: ${{ always() }} # IMPORTANT: run Android Test Report regardless
-      
-    - name: 'Upload Artifact'
-      uses: actions/upload-artifact@v3
-      with:
-       name: my-artifact
-       path: my_file.txt
+ 
+       
+  coverage:
+       defaults:
+            run:
+             working-directory: ./GithubAction
+       permissions:
+            checks: write
+            pull-requests: write
+            contents: write
+       runs-on: ubuntu-latest
+       steps:
+            - uses: actions/checkout@v1
+            - uses: ArtiomTr/jest-coverage-report-action@v2
       
