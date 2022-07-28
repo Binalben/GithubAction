@@ -26,11 +26,6 @@ jobs:
     - name: Unit Test
       run: ./gradlew testDebugUnitTest
 
-    - name: Report
-      uses: dorny/test-reporter@v1
-      if: always()
-      with:
-          name: Maven Tests
-          path: ./GithubAction/*.xml
-          reporter: java-junit
-          fail-on-error: true
+    - name: Android Test Report
+      uses: asadmansr/android-test-report-action@v1.2.0
+      if: ${{ always() }} # IMPORTANT: run Android Test Report regardless
