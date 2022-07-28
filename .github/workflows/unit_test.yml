@@ -29,3 +29,6 @@ jobs:
     - name: Android Test Report
       uses: asadmansr/android-test-report-action@v1.2.0
       if: ${{ always() }} # IMPORTANT: run Android Test Report regardless
+      
+    - name: Archive code coverage results
+      uses: actions/upload-artifact@v3
