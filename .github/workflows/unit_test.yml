@@ -35,7 +35,6 @@ jobs:
       with:
          name: unit test result upload
          github-token: ${{ secrets.GITHUB_TOKEN }}
-         test-command: "yarn jest --coverage"
 
     - name: Download all workflow run artifacts
       uses: actions/download-artifact@v3
