@@ -34,6 +34,7 @@ jobs:
       uses: ziishaned/jest-reporter-action@v0.0.1
       with:
          name: unit test result upload
+         github-token: ${{ secrets.GITHUB_TOKEN }}
          test-command: "yarn jest --coverage"
 
     - name: Download all workflow run artifacts
