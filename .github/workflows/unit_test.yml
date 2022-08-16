@@ -31,10 +31,10 @@ jobs:
       if: ${{ always() }} # IMPORTANT: run Android Test Report regardless
  
     - name: Upload html test report
-      uses: actions/upload-artifact@v3
+      uses: ziishaned/jest-reporter-action@v0.0.1
       with:
-          name: unit test result upload
-          path:  ./GithubAction/app/build/reports/tests/testDebugUnitTest/index.html
+         name: unit test result upload
+         test-command: "yarn jest --coverage"
 
     - name: Download all workflow run artifacts
       uses: actions/download-artifact@v3
