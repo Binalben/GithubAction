@@ -29,22 +29,24 @@ jobs:
     - name: Android Test Report
       uses: asadmansr/android-test-report-action@v1.2.0
       if: ${{ always() }} # IMPORTANT: run Android Test Report regardless
-
-    - name: generate report
-      uses: actions/upload-artifact@v2
+ 
+    - name: Upload html test report
+      uses: actions/upload-artifact@v3
       with:
-          name: report 
-          path: app/build/reports/coverage/debug
+          name: unit test result upload
+          path:  ./GithubAction/app/build/reports/tests/testDebugUnitTest/index.html
 
-
-    - name: Download Test Reports Folder
-      uses: actions/download-artifact@v2
+    - name: Download all workflow run artifacts
+      uses: actions/download-artifact@v3
       with:
           name: report
-          path: app/build/reports/coverage/debug
+          path: ./GithubAction/app/build/reports/tests/testDebugUnitTest/index.html
+      
+    - name: Code Coverage Summary Report
+      uses: devmasx/coverage-check-action@v1.2.0
 
     - name: Upload Test Report
       uses: codecov/codecov-action@v2
       with:
-          files: "app/build/reports/coverage/debug/report.xml"
+          files: ./GithubAction/app/build/reports/coverage/debug/report.xml
       
