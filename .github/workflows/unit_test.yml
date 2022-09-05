@@ -11,18 +11,17 @@ jobs:
       run:
         working-directory: ./GithubAction
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v3
     - name: set up JDK 11
-      uses: actions/setup-java@v1
+      uses: actions/setup-java@v3
       with:
         java-version: '11'
-        distribution: 'temurin'
+        distribution: 'zulu'
         cache: gradle
      
     - name: Make gradlew executable
       run: chmod +x ./gradlew
-      
-          
+            
       # Execute coverage report - name: Unit Test
     - name: Unit Test coverage report
       run: ./gradlew createDebugUnitTestCoverageReport
