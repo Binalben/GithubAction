@@ -44,7 +44,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
           name: unit test coverage report upload
-          path:  ./GithubAction/app/build/reports/coverage/test/debug/index.html
+          path:  ./GithubAction/app/build/reports/coverage/test/debug/com.sava.githubaction
       
          
          
