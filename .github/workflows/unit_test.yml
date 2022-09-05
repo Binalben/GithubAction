@@ -24,7 +24,7 @@ jobs:
             
       # Execute coverage report - name: Unit Test
     - name: Unit Test coverage report
-      run: ./gradlew createDebugUnitTestCoverageReport
+      run: ./gradlew createDebugCoverageReport
  
     - name: Upload html coverage report
       uses: actions/upload-artifact@v3
