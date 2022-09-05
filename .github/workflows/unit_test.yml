@@ -1,4 +1,4 @@
-name: Unit Test Action
+name: Build Project
 on:
   push:
     branches: [ "main" ]
@@ -9,12 +9,20 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./GithubAction
+        working-directory: ./Sava
     steps:
+    - uses: actions/checkout@v1
+    - name: set up JDK 11
+      uses: actions/setup-java@v1
+      with:
+        java-version: '11'
+        distribution: 'temurin'
+        cache: gradle
+     
     - name: Make gradlew executable
       run: chmod +x ./gradlew
       
-    # Execute unit tests
+     # Execute unit tests
     - name: Unit Test
       run: ./gradlew testDebugUnitTest
 
@@ -26,19 +34,25 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
           name: unit test result upload
-          path:  ./GithubAction/app/build/reports/tests/testDebugUnitTest/index.html
+          path:  ./Sava/app/build/reports/tests/testDebugUnitTest/index.html
+         
+         
+      # Execute apk
+    - name: Get apk path
+      id: apk-path
+      run: |
+         path=$(find **/build/outputs/apk -name '*.apk' -type f | head -1)
+         echo "::set-output name=path::$path"
+    
+    - name: Build apk debug project (APK)
+      run: ./gradlew assembleDebug
+      
+    - name: Upload apk
+      uses: actions/upload-artifact@v3
+      with:
+          name: App Debug APK
+          path: ./Sava/app/build/outputs/
 
+   # download all artifacts
     - name: Download all workflow run artifacts
       uses: actions/download-artifact@v3
-      with:
-          name: report
-          path: ./GithubAction/app/build/reports/tests/testDebugUnitTest/index.html
-      
-    - name: Code Coverage Summary Report
-      uses: devmasx/coverage-check-action@v1.2.0
-
-    - name: Upload Test Report
-      uses: codecov/codecov-action@v2
-      with:
-          files: ./GithubAction/app/build/reports/coverage/debug/report.xml
-      
