@@ -35,6 +35,17 @@ jobs:
       with:
           name: unit test result upload
           path:  ./GithubAction/app/build/reports/tests/testDebugUnitTest/index.html
+          
+      # Execute coverage report - name: Unit Test
+    - name: Unit Test coverage report
+      run: ./gradlew createDebugUnitTestCoverageReport
+ 
+    - name: Upload html coverage report
+      uses: actions/upload-artifact@v3
+      with:
+          name: unit test result upload
+          path:  ./GithubAction/app/build/reports/coverage/test/debug/index.html
+      
          
          
       # Execute apk
