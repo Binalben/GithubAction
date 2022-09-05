@@ -34,7 +34,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
           name: unit test result upload
-          path:  ./Sava/app/build/reports/tests/testDebugUnitTest/index.html
+          path:  ./GithubAction/app/build/reports/tests/testDebugUnitTest/index.html
          
          
       # Execute apk
@@ -51,7 +51,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
           name: App Debug APK
-          path: ./Sava/app/build/outputs/
+          path: ./GithubAction/app/build/outputs/
 
    # download all artifacts
     - name: Download all workflow run artifacts
