@@ -64,8 +64,11 @@ jobs:
           name: App Debug APK
           path: ./GithubAction/app/build/outputs/
           
+    - name: Generate Javadoc
+      run: mvn org.apache.maven.plugins:maven-javadoc-plugin:3.4.0:aggregate
+      shell: bash
     - name: Deploy JavaDoc
-      uses: avinal/github-pages-deploy-action@main
+      uses: avinal/github-pages-deploy-action@v4.4.1
       with:
                     # GitHub access token with Repo Access
                     GITHUB_TOKEN: ${{ github.token }}
