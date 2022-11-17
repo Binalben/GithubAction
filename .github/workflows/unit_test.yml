@@ -63,6 +63,23 @@ jobs:
       with:
           name: App Debug APK
           path: ./GithubAction/app/build/outputs/
+          
+    - name: Deploy JavaDoc
+      uses: avinal/github-pages-deploy-action@main
+      with:
+                    # GitHub access token with Repo Access
+                    GITHUB_TOKEN: ${{ github.token }}
+                    # For JavaDoc - "java"
+                    # For python write python package and additional packages if any - "python3 python3-pip" 
+                    LANGUAGE: "<write-as-directed-above>"
+                    # Write make command to generate html e.g.- "make html"
+                    MAKE_COMMAND: "make html"
+                    # Write the branch name for storing github pages source 
+                    PAGES_BRANCH: "main"
+                    # Write the branch name having source files for site/documentation
+                    BUILD_FROM: "main"
+                    # Write the name of the output folder where generated html is stored by makefile.
+                    DOCS_FOLDER: "GithubAction/app"
 
    # download all artifacts
     - name: Download all workflow run artifacts
