@@ -64,6 +64,12 @@ jobs:
           name: App Debug APK
           path: ./GithubAction/app/build/outputs/
           
+    - name : Retrieve Version
+      run: |
+       echo "::set-output name=VERSION_NAME::$(${{github.workspace}}/gradlew -q printVersionName)"
+       id: android_version
+         
+          
     - name: Deploy JavaDoc 🚀
       uses: MathieuSoysal/Javadoc-publisher.yml@v2.0.4
       with:
