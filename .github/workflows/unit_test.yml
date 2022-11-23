@@ -64,18 +64,19 @@ jobs:
           name: App Debug APK
           path: ./GithubAction/app/build/outputs/
           
-    - name: Get version
-      run: |
-             echo "version_name=${{steps.android_version.outputs.VERSION_NAME}}" >> $GITHUB_ENV
-         
-          
-    - name: Deploy JavaDoc 🚀
-      uses: MathieuSoysal/Javadoc-publisher.yml@v2.0.4
+    - name: Get apk info
+      id: apk-info
+      uses: hkusu/apk-info-action@v1
       with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          javadoc-branch: main
-          java-version: 17
-          target-folder: javadoc 
+            apk-path: ${{ steps.apk-path.outputs.path }}
+            
+    - name: Show apk info
+      run: |
+       echo '${{ steps.apk-info.outputs.application-name }}'
+       echo '${{ steps.apk-info.outputs.application-id }}'
+       echo '${{ steps.apk-info.outputs.version-code }}'
+       echo '${{ steps.apk-info.outputs.version-name }}'
+          
 
    # download all artifacts
     - name: Download all workflow run artifacts
