@@ -49,15 +49,7 @@ jobs:
           
           
       # Execute apk
-    - name: Get apk path
-      id: apk-path
-      run: |
-         path=$(find **/build/outputs/apk -name '*.apk' -type f | head -1)
-         echo "::set-output name=path::$path"
-         echo FOO= $path
-         
-    - name: other step that needs FOO
-      run: echo ${{ env.FOO }}
+    
     
     - name: Build apk debug project (APK)
       run: ./gradlew assembleDebug
@@ -68,7 +60,15 @@ jobs:
           name: echo ${{ env.FOO }}
           path: ./GithubAction/app/build/outputs/
           
-  
+    - name: Get apk path
+      id: apk-path
+      run: |
+         path=$(find **/build/outputs/apk -name '*.apk' -type f | head -1)
+         echo "::set-output name=path::$path"
+         echo FOO= $path
+         
+    - name: other step that needs FOO
+      run: echo ${{ env.FOO }}
         
     - name: Get apk info
       id: apk-info
