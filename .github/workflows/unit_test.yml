@@ -54,12 +54,6 @@ jobs:
     - name: Build apk debug project (APK)
       run: ./gradlew assembleDebug
       
-    - name: Upload apk
-      uses: actions/upload-artifact@v3
-      with:
-          name: echo ${{ env.FOO }}
-          path: ./GithubAction/app/build/outputs/
-          
     - name: Get apk path
       id: apk-path
       run: |
@@ -69,6 +63,13 @@ jobs:
          
     - name: other step that needs FOO
       run: echo ${{ env.FOO }}
+    - name: Upload apk
+      uses: actions/upload-artifact@v3
+      with:
+          name:  ${{ env.FOO }}
+          path: ./GithubAction/app/build/outputs/
+          
+   
         
     - name: Get apk info
       id: apk-info
