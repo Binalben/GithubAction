@@ -54,6 +54,10 @@ jobs:
       run: |
          path=$(find **/build/outputs/apk -name '*.apk' -type f | head -1)
          echo "::set-output name=path::$path"
+         echo FOO= $path
+         
+    - name: other step that needs FOO
+      run: echo ${{ env.FOO }}
     
     - name: Build apk debug project (APK)
       run: ./gradlew assembleDebug
@@ -64,6 +68,8 @@ jobs:
           name: App Debug APK
           path: ./GithubAction/app/build/outputs/
           
+  
+        
     - name: Get apk info
       id: apk-info
       uses: hkusu/apk-info-action@v1
