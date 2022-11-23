@@ -64,10 +64,9 @@ jobs:
           name: App Debug APK
           path: ./GithubAction/app/build/outputs/
           
-    - name : Retrieve Version
+    - name: Get version
       run: |
-       echo "::set-output name=VERSION_NAME::$(${{github.workspace}}/gradlew -q printVersionName)"
-       id: android_version
+             echo "version_name=${{steps.android_version.outputs.VERSION_NAME}}" >> $GITHUB_ENV
          
           
     - name: Deploy JavaDoc 🚀
