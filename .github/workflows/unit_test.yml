@@ -66,7 +66,7 @@ jobs:
     - name: Upload apk
       uses: actions/upload-artifact@v3
       with:
-          name:  ${{ env.FOO }}
+          name:  $path
           path: ./GithubAction/app/build/outputs/
           
    
