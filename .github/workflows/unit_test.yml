@@ -67,15 +67,20 @@ jobs:
          echo "MY_NAME_APK=$path" >> $GITHUB_ENV
          
     
-    - name: Split apk name
-      id: split
-      run: echo "::set-output name=fragment::${env.MY_NAME_APK##*/}"
+    
         
+    - name: Split apk name
+      uses: jungwinter/split@master
+      id: branch
+      with:
+          msg: ${{ env.MY_NAME_APK }}
+          separator: "/"
+          maxsplit: -3
 
        
     - name: new apk path
       run: |
-          echo ${{ steps.split.outputs.fragment }}
+          echo ${{ steps.branch.outputs_3}}
       
     - name: new apk path
       run: |
