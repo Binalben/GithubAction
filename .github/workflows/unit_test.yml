@@ -8,7 +8,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      MY_NAME: "Mona The Octocat"
+      MY_NAME_APK: "Mona The Octocat"
       
     defaults:
       run:
@@ -64,8 +64,7 @@ jobs:
       run: |
          path=$(find **/build/outputs/apk -name '*.apk' -type f | head -1)
          echo "::set-output name=path::$path"
-         env:
-         MY_NAME_APK: $path
+         env.MY_NAME_APK: $path
          
     - name: Upload apk ${{ env.MY_NAME_APK }}
       uses: actions/upload-artifact@v3
@@ -73,10 +72,10 @@ jobs:
           name:  ${{ env.MY_NAME_APK }}
           path: ./GithubAction/app/build/outputs/
       
-    - name: Upload apk $MY_NAME
+    - name: Upload apk "$MY_NAME_APK"
       uses: actions/upload-artifact@v3
       with:
-          name:  "$MY_NAME"
+          name:  "$MY_NAME_APK"
           path: ./GithubAction/app/build/outputs/
           
 
