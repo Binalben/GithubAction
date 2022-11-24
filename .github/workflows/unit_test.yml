@@ -66,13 +66,18 @@ jobs:
          echo "::set-output name=path::$path"
          echo "MY_NAME_APK=$path" >> $GITHUB_ENV
          
-    - id: get-id
-      uses: actions/github-script@0.9.0
+    
+    - name: get sub string
+      uses: bhowell2/github-substring-action@v1.0.0
+      id: two
       with:
-       script: |
-        const id = ${{ env.MY_NAME_APK }}.split('/')[4]
-        core.setOutput('id', id)
-    - run: echo "${{steps.get-id.outputs.id}}"
+       value:  ${{ env.MY_NAME_APK }}
+       index_of_str: "app/build/outputs/debug/"
+       length_from_start: 24
+      
+    - name: new apk path
+      run: |
+          echo "MY_NAME_APK= steps.two.outputs.substring" >> $GITHUB_ENV
       
          
     - name: Upload apk ${{ env.MY_NAME_APK }}
