@@ -80,7 +80,7 @@ jobs:
       
     - name: new apk path
       run: |
-          echo "MY_NAME_APK=  ${{ steps.branch.outputs.Substring results }}" >> $GITHUB_ENV
+          echo "MY_NAME_APK=  ${{ steps.branch.outputs.Substring }}" >> $GITHUB_ENV
       
          
     - name: Upload apk ${{ env.MY_NAME_APK }}
