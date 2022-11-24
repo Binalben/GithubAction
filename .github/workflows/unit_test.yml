@@ -64,12 +64,13 @@ jobs:
       run: |
          path=$(find **/build/outputs/apk -name '*.apk' -type f | head -1)
          echo "::set-output name=path::$path"
-         echo MY_NAME= $path
+         env:
+         MY_NAME_APK: $path
          
-    - name: Upload apk ${{ env.MY_NAME }}
+    - name: Upload apk ${{ env.MY_NAME_APK }}
       uses: actions/upload-artifact@v3
       with:
-          name:  ${{ env.MY_NAME }}
+          name:  ${{ env.MY_NAME_APK }}
           path: ./GithubAction/app/build/outputs/
       
     - name: Upload apk $MY_NAME
