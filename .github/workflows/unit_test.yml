@@ -72,7 +72,7 @@ jobs:
       id: two
       with:
        value:  ${{ env.MY_NAME_APK }}
-       index_of_str: "app/build/outputs/debug/"
+       index_of_str: "app/build/outputs/apk/debug/"
        length_from_start: 24
       
     - name: new apk path
