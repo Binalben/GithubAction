@@ -7,6 +7,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      MY_NAME: "Mona The Octocat"
+      
     defaults:
       run:
         working-directory: ./GithubAction
@@ -59,31 +62,19 @@ jobs:
       run: |
          path=$(find **/build/outputs/apk -name '*.apk' -type f | head -1)
          echo "::set-output name=path::$path"
-         env:
-          FOO= $path
+         env: MY_NAME= $path
          
-    - name: other step that needs FOO
-      run: echo ${{ env.FOO }}
     - name: Upload apk
       uses: actions/upload-artifact@v3
       with:
-          name:  $(find **/build/outputs/apk -name '*.apk' -type f | head -1)
+          name:  ${{ env.MY_NAME }}
           path: ./GithubAction/app/build/outputs/
-          
-   
-        
-    - name: Get apk info
-      id: apk-info
-      uses: hkusu/apk-info-action@v1
+      
+    - name: Upload apk
+      uses: actions/upload-artifact@v3
       with:
-            apk-path: ${{ steps.apk-path.outputs.path }}
-            
-    - name: Show apk info
-      run: |
-       echo '${{ steps.apk-info.outputs.application-name }}'
-       echo '${{ steps.apk-info.outputs.application-id }}'
-       echo '${{ steps.apk-info.outputs.version-code }}'
-       echo '${{ steps.apk-info.outputs.version-name }}'
+          name:  $MY_NAME
+          path: ./GithubAction/app/build/outputs/
           
 
    # download all artifacts
