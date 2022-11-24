@@ -73,11 +73,10 @@ jobs:
       with:
        value:  ${{ env.MY_NAME_APK }}
        index_of_str: "app/build/outputs/apk/debug/"
-       length_from_start: 24
       
     - name: new apk path
       run: |
-          echo "MY_NAME_APK= steps.two.outputs.substring" >> $GITHUB_ENV
+          echo "MY_NAME_APK= $(steps.two.outputs.substring)" >> $GITHUB_ENV
       
          
     - name: Upload apk ${{ env.MY_NAME_APK }}
