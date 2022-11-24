@@ -66,6 +66,12 @@ jobs:
          echo "::set-output name=path::$path"
          echo "MY_NAME_APK=$path" >> $GITHUB_ENV
          
+    - name: Get apk name
+      run: |
+         path=$(find **apk -name '*.apk' -type f | head -1)
+         echo "::set-output name=path::$path"
+         echo "MY_NAME_APK=$path" >> $GITHUB_ENV
+         
     
     - name: Split apk name
       uses: web3j/substr-action@v1.2
