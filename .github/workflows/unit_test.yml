@@ -67,7 +67,11 @@ jobs:
          echo "MY_NAME_APK=$path" >> $GITHUB_ENV
          
     
-    
+    - name: Split apk name
+      uses: web3j/substr-action@v1.2
+      with:
+       value: ${{ env.MY_NAME_APK }}
+       start: '27'
         
     - name: Split apk name
       uses: jungwinter/split@master
@@ -75,7 +79,7 @@ jobs:
       with:
           msg: ${{ env.MY_NAME_APK }}
           separator: "/"
-          maxsplit: -3
+          maxsplit: 3
 
        
     - name: new apk path
