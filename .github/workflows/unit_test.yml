@@ -65,6 +65,14 @@ jobs:
          path=$(find **/build/outputs/apk -name '*.apk' -type f | head -1)
          echo "::set-output name=path::$path"
          echo "MY_NAME_APK=$path" >> $GITHUB_ENV
+         
+    - id: get-id
+      uses: actions/github-script@0.9.0
+      with:
+       script: |
+        const id = ${{ env.MY_NAME_APK }}.split('/')[4]
+        core.setOutput('id', id)
+    - run: echo "${{steps.get-id.outputs.id}}"
       
          
     - name: Upload apk ${{ env.MY_NAME_APK }}
