@@ -57,12 +57,14 @@ jobs:
     - name: Build apk debug project (APK)
       run: ./gradlew assembleDebug
       
+
+         
     - name: Get apk path
       id: apk-path
       run: |
          path=$(find **/build/outputs/apk -name '*.apk' -type f | head -1)
-         env: 
-         MY_NAME= $path
+         echo "::set-output name=path::$path"
+         echo MY_NAME= $path
          
     - name: Upload apk ${{ env.MY_NAME }}
       uses: actions/upload-artifact@v3
