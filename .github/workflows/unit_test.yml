@@ -59,14 +59,15 @@ jobs:
       run: |
          path=$(find **/build/outputs/apk -name '*.apk' -type f | head -1)
          echo "::set-output name=path::$path"
-         echo FOO= $path
+         env:
+          FOO= $path
          
     - name: other step that needs FOO
       run: echo ${{ env.FOO }}
     - name: Upload apk
       uses: actions/upload-artifact@v3
       with:
-          name:  ${{ env.path }}
+          name:  ${{ env.FOO }}
           path: ./GithubAction/app/build/outputs/
           
    
