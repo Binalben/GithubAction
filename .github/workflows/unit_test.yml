@@ -68,27 +68,19 @@ jobs:
          
     
     - name: Split apk name
+      id: branch
       uses: web3j/substr-action@v1.2
       with:
        value: ${{ env.MY_NAME_APK }}
-       start: '27'
-        
-    - name: Split apk name
-      uses: jungwinter/split@master
-      id: branch
-      with:
-          msg: ${{ env.MY_NAME_APK }}
-          separator: "/"
-          maxsplit: 3
-
-       
+       start: '28'
+              
     - name: new apk path
       run: |
-          echo ${{ steps.branch.outputs_3}}
+          echo ${{steps.branch.outputs.Substring}}
       
     - name: new apk path
       run: |
-          echo "MY_NAME_APK=  ${{ steps.split.outputs.fragment }}" >> $GITHUB_ENV
+          echo "MY_NAME_APK=  ${{ steps.branch.outputs.Substring }}" >> $GITHUB_ENV
       
          
     - name: Upload apk ${{ env.MY_NAME_APK }}
