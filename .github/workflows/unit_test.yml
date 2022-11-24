@@ -67,28 +67,25 @@ jobs:
          echo "MY_NAME_APK=$path" >> $GITHUB_ENV
          
     
-    - name: get sub string
-      uses: bhowell2/github-substring-action@v1.0.0
-      id: two
-      with:
-       value:  ${{ env.MY_NAME_APK }}
-       index_of_str: "app/build/outputs/apk/debug/"
+    - name: Split apk name
+      id: split
+      run: echo "::set-output name=fragment::${env.MY_NAME_APK##*/}"
+        
+
+       
+    - name: new apk path
+      run: |
+          echo ${{ steps.split.outputs.fragment }}
       
     - name: new apk path
       run: |
-          echo "MY_NAME_APK= $(steps.two.outputs.substring)" >> $GITHUB_ENV
+          echo "MY_NAME_APK=  ${{ steps.split.outputs.fragment }}" >> $GITHUB_ENV
       
          
     - name: Upload apk ${{ env.MY_NAME_APK }}
       uses: actions/upload-artifact@v3
       with:
           name:  ${{ env.MY_NAME_APK }}
-          path: ./GithubAction/app/build/outputs/
-      
-    - name: Upload apk "$MY_NAME_APK"
-      uses: actions/upload-artifact@v3
-      with:
-          name:  "$MY_NAME_APK"
           path: ./GithubAction/app/build/outputs/
           
 
