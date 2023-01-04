@@ -84,10 +84,10 @@ jobs:
           echo "MY_NAME_APK=  ${{ steps.branch.outputs.Substring }}" >> $GITHUB_ENV
       
          
-    - name: Upload apk ${{ env.MY_NAME_APK }}
+    - name: Upload apk
       uses: actions/upload-artifact@v3
       with:
-          name:  ${{ env.MY_NAME_APK }}
+          name:  ${{ steps.branch.outputs.result }}
           path: ./GithubAction/app/build/outputs/
           
 
