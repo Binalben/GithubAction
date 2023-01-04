@@ -73,18 +73,23 @@ jobs:
          echo "MY_NAME_APK=$path" >> $GITHUB_ENV
          
     - name: Get apk name 2
-      run: |
-         path=$(find /build/outputs/apk ** -name '*.apk' -type f | head -1)
+      with:
+         path:  ./GithubAction/app/build/outputs/apk 
+         run: |
+          path=$(find ** -name '*.apk' -type f | head -1)
+          echo "::set-output name=path::$path"
+          echo "MY_NAME_APK=$path" >> $GITHUB_ENV
+         
+    - name: Split apk name 1
+      uses: web3j/substr-action@v1.2
+      with:
+       name : new_apk_name
+       value: ${{ env.MY_NAME_APK }}
+       run: |
+         path=$(start: '28')
          echo "::set-output name=path::$path"
          echo "MY_NAME_APK=$path" >> $GITHUB_ENV
-          
-    - name: Get apk name 3
-      run: |
-         path=$(find **-name '*.apk' -type f | head -3)
-         echo "::set-output name=path::$path"
-         echo "MY_NAME_APK=$path" >> $GITHUB_ENV
-         with:
-             path:  ./GithubAction/app/build/outputs/apk
+       
     
     - name: Split apk name
       uses: web3j/substr-action@v1.2
