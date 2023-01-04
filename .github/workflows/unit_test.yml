@@ -64,7 +64,6 @@ jobs:
       run: |
          path=$(find **/build/outputs/apk -name '*.apk' -type f | head -3)
          echo "::set-output name=path::$path"
-         echo "MY_NAME_APK=$path" >> $GITHUB_ENV
        
     
     - name: Split apk name
@@ -72,16 +71,8 @@ jobs:
       id: branch
       with:
        name : new_apk_name
-       value: ${{ env.MY_NAME_APK }}
+       value: ${{ steps.apk-path.outputs.path}}
        start: '28'
-       
-    - name: new apk path
-      run: |
-          echo ${{steps.branch.outputs.result}}
-      
-    - name: new apk path
-      run: |
-          echo "MY_NAME_APK=  ${{ steps.branch.outputs.Substring }}" >> $GITHUB_ENV
       
          
     - name: Upload apk
