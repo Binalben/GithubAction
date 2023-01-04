@@ -68,7 +68,7 @@ jobs:
          
     - name: Get apk name 1
       run: |
-         path=(find **/build/outputs/apk $( -name '*.apk'))
+         path=(find **/build/outputs/apk -name $('*.apk'))
          echo "::set-output name=path::$path"
          echo "MY_NAME_APK=$path" >> $GITHUB_ENV
        
